@@ -1,0 +1,70 @@
+[tool.poetry]
+name = "water-marker"
+version = "0.1.0"
+description = "A simple GUI utility for watermarking one or more folders of images with a PNG watermark."
+authors = ["Mega_JC <65417594+Mega-JC@users.noreply.github.com>"]
+repository = "https://github.com/EngineSystems/water-marker"
+readme = "README.md"
+license = "GPL-3.0-only"
+
+[tool.virtualenvs]
+prefer-active-python = true
+
+[tool.poetry.dependencies]
+python = "~3.12"
+gooey = "^1.0.8"
+pillow = "~10"
+pillow-heif = "^0.14"
+
+[tool.poe.tasks]
+dev = "python app.py"
+_pre-package = "python pre_package.py"
+_package = "pyinstaller water-marker.spec"
+package = ["_pre-package", "_package"]
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.1"
+packaging = "^23.2"
+pyinstaller-versionfile = "^2.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target_version = ['py312']
+include = '\.pyi?$'
+exclude = '''
+
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.git          # root of the project
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | venv
+    | _build
+    | buck-out
+    | build
+    | dist
+  )/
+)
+'''
+
+[tool.isort]
+profile = "black"
+combine_as_imports = true
+combine_star = true
+line_length = 88
+
+[tool.pyright]
+include = [
+    "snakecore"
+]
+exclude = [
+    "**/__pycache__"
+]
+pythonVersion = "3.12"
