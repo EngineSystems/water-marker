@@ -22,7 +22,7 @@ To get started with development, install Python 3.12 on your system.
     ```sh
     python -m pip install pipx
     pipx install poetry
-    pipx install poe
+    pipx install poethepoet
     pipx install pyinstaller
     pip install pyinstaller-versionfile
     ```
